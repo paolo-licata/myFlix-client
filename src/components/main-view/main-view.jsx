@@ -46,10 +46,6 @@ export const MainView = () => {
 		);
 	}
 
-	if (selectedMovie) {
-		return <MovieView movie={selectedMovie} />
-	}
-
 	if (movies.length === 0) {
 		return <div>The movie list is empty.</div>;
 	} 
