@@ -15,11 +15,12 @@ export const LoginView = ({ onLoggedIn }) => {
 
 		fetch("https://my-movie-flix-a563168476e8.herokuapp.com/login", {
 			method: "POST",
+			body: JSON.stringify(data),
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify(data)
-		}).then((response) => response.json())
+		})
+		.then((response) => response.json())
 		.then((data) => {
 			console.log("Login response: ", data);
 			if (data.user) {
@@ -27,10 +28,11 @@ export const LoginView = ({ onLoggedIn }) => {
 				localStorage.setItem("token", data.token);
 				onLoggedIn(data.user, data.token);
 			} else {
-				alert("No such user")
+				alert("No such user found")
 			}
 		})
 		.catch((e) => {
+			console.error("Error:", e.message);
 			alert("Something went wrong")
 		});
 		};

@@ -22,11 +22,8 @@ export const MainView = () => {
 		})
 		.then((response) => response.json())
 		.then((movies) => {
-			setMovies(movies);
-		});
-	}, [token]);
-			
-			const moviesFromAPI = movies.map((movie) => {
+			console.log(movies);
+			const moviesFromAPI = movies.map(movie =>  {
 				return {
 					id: movie._id,
 					title: movie.Title,
@@ -36,6 +33,10 @@ export const MainView = () => {
 					director: movie.Director
 				}
 			});
+			setMovies(moviesFromAPI);
+		});
+	}, [token]);
+			
 
 	if (!user) {
 		return (
