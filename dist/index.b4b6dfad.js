@@ -27548,7 +27548,7 @@ _c = MovieCard;
 MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         title: (0, _propTypesDefault.default).string.isRequired,
-        Description: (0, _propTypesDefault.default).string.isRequired,
+        description: (0, _propTypesDefault.default).string.isRequired,
         Genre: (0, _propTypesDefault.default).shape({
             Name: (0, _propTypesDefault.default).string.isRequired,
             Description: (0, _propTypesDefault.default).string
@@ -27557,7 +27557,7 @@ MovieCard.propTypes = {
             Name: (0, _propTypesDefault.default).string.isRequired,
             Bio: (0, _propTypesDefault.default).string
         }),
-        ImagePath: (0, _propTypesDefault.default).string.isRequired
+        imagePath: (0, _propTypesDefault.default).string.isRequired
     }).isRequired,
     onClick: (0, _propTypesDefault.default).func.isRequired
 };
