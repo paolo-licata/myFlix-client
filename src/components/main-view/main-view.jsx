@@ -3,6 +3,9 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 
 export const MainView = () => {
 	const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -14,7 +17,7 @@ export const MainView = () => {
 
 	useEffect(() => {
 		if (!token) {
-			return;
+			return
 		}
 
 		fetch("https://my-movie-flix-a563168476e8.herokuapp.com/movies", {
@@ -38,45 +41,47 @@ export const MainView = () => {
 	}, [token]);
 			
 
-	if (!user) {
+	
 		return (
+			<Row className="justify-content-md-center">
+				{!user ? (
 			<>
+			<Col sm={4} md={6} lg={8} xl={10}>
+			<h3>Login</h3>
 			 <LoginView onLoggedIn={(user, token) => {
 				setUser(user);
 				setToken(token);
 				}} 
 			/>
-			or
+			<h3>or Register for free</h3>
 			<SignupView />
+			</Col>
 			</>
-		);
-	}
-
-	if (selectedMovie) {
-		return (
-			<MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-		);
-	}
-
-	if (movies.length === 0) {
-		return <div>The movie list is empty.</div>;
-	} 
-
-	return (
+		) : selectedMovie ? (
+			<Col md={8}>
+			<MovieView 
+			movie={selectedMovie} 
+			onBackClick={() => setSelectedMovie(null)} 
+			/>
+			</Col>
+		) : movies.length === 0 ? (
+		 <div>The movie list is empty.</div>
+		) : (
 		<>
-		<div>
 			{movies.map((movie) => (
+				<Col className="mb-5" key={movie.id} sm={6} md={5} lg={3} xl={2}>
 				<MovieCard 
-				key={movie.id} 
 				movie={movie}
 				onMovieClick={(newSelectedMovie) => {
-					setSelectedMovie(newSelectedMovie);
+					setSelectedMovie(newSelectedMovie)
 				}}
 				/>
+			 	</Col>
 			))}
-		</div>
-		<button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
+			<Button variant="primary" onClick={() => { setUser(null); setToken(null); localStorage.clear() }}>Logout</Button>
 		</>
-	);
-};
+		)}
+		</Row>		
+	)
+}
 
