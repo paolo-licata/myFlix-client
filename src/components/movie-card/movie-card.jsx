@@ -1,5 +1,8 @@
+import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 
 export const MovieCard = ({ movie, onMovieClick }) => {
 	return (
@@ -8,26 +11,25 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 			<Card.Body>
 				<Card.Title>{movie.title}</Card.Title>
 				<Card.Text>{movie.genre.Name}</Card.Text>
-				<Button onClick={() => onMovieClick(movie)} variant="link">Watch Now</Button>
+				<Link to={`/movies/${movie.id}`}>
+					<Button variant="link">Watch Now</Button>
+				</Link>
 			</Card.Body>
 		</Card>
 	)
 }
 
 MovieCard.propTypes = {
-	movie: PropTypes.shape({
+	movies: PropTypes.shape({
 		title: PropTypes.string.isRequired,
-		description: PropTypes.string. isRequired,
-		Genre: PropTypes.shape({
+		genre: PropTypes.shape({
 			Name: PropTypes.string.isRequired,
-			Description: PropTypes.string
 		}),
-		Director: PropTypes.shape({
+		director: PropTypes.shape({
 			Name: PropTypes.string.isRequired,
-			Bio: PropTypes.string,
-		}),
-		imagePath: PropTypes.string.isRequired
-	}).isRequired,
-	onClick: PropTypes.func.isRequired
-};
+	}),
+	imagePath: PropTypes.string.isRequired,
+})
+}
+		
 
