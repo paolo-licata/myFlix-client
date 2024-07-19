@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
-    <Navbar className="navbar" bg="primary" expand="md">
+    <Navbar className="navbar navbar-expand-md navbar-fixed-top" bg="primary" expand="md">
       <Container>
         <Navbar.Brand as={Link} to="/">
           Welcome to <strong>MyFlix</strong>

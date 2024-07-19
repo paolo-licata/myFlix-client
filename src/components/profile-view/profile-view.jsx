@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { Button, Card, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export const ProfileView = ({ movies }) => {
     const localUser = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("token");
+    const navigate = useNavigate();
     const fav = movies.filter((movie) => {
         return localUser.FavoriteMovies.includes(movie.id);
     });
@@ -13,35 +17,70 @@ export const ProfileView = ({ movies }) => {
     const [password, setPassword] = useState(localUser.Password || "");
     const [email, setEmail] = useState(localUser.Email || "");
     const [birthday, setBirthday] = useState(localUser.Birthday || "");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const data = {
             Username: username,
-            Password: password,
+            ...(password && { Password: password }),
             Email: email,
             Birthday: birthday
         };
 
-        fetch("https://my-movie-flix-a563168476e8.herokuapp.com/users", {
-            method: "POST",
+        fetch(`https://my-movie-flix-a563168476e8.herokuapp.com/users/${localUser.Username}`, {
+            method: "PUT",
             body: JSON.stringify(data),
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             }
         }).then((response) => {
             if (response.ok) {
-                alert("Signup successful");
+                alert("Profile updated");
+                localStorage.setItem("user", JSON.stringify({...localUser, ...data }))
                 window.location.reload();
             } else {
-                alert("Signup failed");
+                return response.json().then(err => {
+                    throw new Error(err.message);
+                });
             }
+        }).catch((error) => {
+            setErrorMessage(error.message || "Profile update failed")
+        })
+    };
+
+    const handleDelete = () => {
+        if (!window.confirm("Are you sure you want to delete your account? This action is not reversible")) {
+            return;
+        }
+
+        fetch(`https://my-movie-flix-a563168476e8.herokuapp.com/users/${localUser.Username}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        }).then((response) => {
+            if (response.ok) {
+                alert("Account deleted successfully");
+                localStorage.removeItem("user");
+                localStorage.removeItem("token");
+                navigate("/signup");
+            } else {
+                return response.json().then(err => {
+                    throw new Error(err.message);
+                })
+            }
+        }).catch((error) => {
+            setErrorMessage(error.message || "Account deletion failed")
         });
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form>
+            {errorMessage && <p className="text-danger">{errorMessage}</p>}
             <Form.Group controlId="formUsername">
                 <Form.Label>
                     Username:
@@ -87,12 +126,17 @@ export const ProfileView = ({ movies }) => {
                     required
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">Edit Profile</Button>
+            <Button variant="primary" type="submit">Update Profile</Button>
+            <Button variant="secondary" onClick={handleDelete} className="ml-2">Delete Account</Button>
+
+            <h3>Favorite Movies:</h3>
+            <Row className="justify-content-md-center">
             {
                 localUser && fav.map((movie) => (
+                    <Col sm={10} md={8} lg={5} xl={3}>
                     <MovieCard movie={movie}>
 
-											<Card>
+						<Card className="h-100">
                          <Card.Img variant="top" src={movie.ImagePath}/>
                          <Card.Body>
                          <Card.Title>{movie.title}</Card.Title>
@@ -101,13 +145,13 @@ export const ProfileView = ({ movies }) => {
                            Open
                          </Link>
                          </Card.Body>
-                       </Card>
+                        </Card>
 
                     </MovieCard>
-										
-                     
-											 
-                ))}
+                    </Col>		 
+            ))}
+            </Row>
         </Form>
     );
 };
+
