@@ -27320,7 +27320,7 @@ const MainView = ()=>{
                                     sm: 4,
                                     md: 6,
                                     lg: 8,
-                                    xl: 10,
+                                    xl: 12,
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
                                         onLoggedIn: (user, token)=>{
                                             setUser(user);

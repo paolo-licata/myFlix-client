@@ -64,7 +64,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col sm={4} md={6} lg={8} xl={10}>
+                  <Col sm={4} md={6} lg={8} xl={12}>
                     <LoginView
                       onLoggedIn={(user, token) => {
                         setUser(user);
