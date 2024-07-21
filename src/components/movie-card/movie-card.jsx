@@ -20,6 +20,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 		})
 			.then((response) => response.json())
 			.then(movies => {
+				localStorage.setItem("user", JSON.stringify(movies))
 				alert("Movie added to Favorites")
 			})
 			.catch(e => console.log(e))
@@ -35,6 +36,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 		})
 				.then((response) => response.json())
 				.then(movies => {
+						localStorage.setItem("user", JSON.stringify(movies))
 						alert("Movie deleted")
 				})
 				.catch(e => console.log(e))

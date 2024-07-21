@@ -27541,6 +27541,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                 "Content-Type": "application/json"
             }
         }).then((response)=>response.json()).then((movies)=>{
+            localStorage.setItem("user", JSON.stringify(movies));
             alert("Movie added to Favorites");
         }).catch((e)=>console.log(e));
     };
@@ -27552,6 +27553,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                 "Content-Type": "application/json"
             }
         }).then((response)=>response.json()).then((movies)=>{
+            localStorage.setItem("user", JSON.stringify(movies));
             alert("Movie deleted");
         }).catch((e)=>console.log(e));
     };
@@ -27564,7 +27566,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                 src: movie.imagePath
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 46,
+                lineNumber: 48,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27573,7 +27575,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 48,
+                        lineNumber: 50,
                         columnNumber: 5
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27584,12 +27586,12 @@ const MovieCard = ({ movie, onMovieClick })=>{
                             children: "Watch Now"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 50,
+                            lineNumber: 52,
                             columnNumber: 6
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 49,
+                        lineNumber: 51,
                         columnNumber: 5
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -27598,7 +27600,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                         children: "Add"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 52,
+                        lineNumber: 54,
                         columnNumber: 5
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -27608,19 +27610,19 @@ const MovieCard = ({ movie, onMovieClick })=>{
                         children: "Remove"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 53,
+                        lineNumber: 55,
                         columnNumber: 5
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 47,
+                lineNumber: 49,
                 columnNumber: 4
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 45,
+        lineNumber: 47,
         columnNumber: 3
     }, undefined);
 };
