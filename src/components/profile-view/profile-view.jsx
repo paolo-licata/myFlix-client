@@ -9,15 +9,16 @@ export const ProfileView = ({ movies }) => {
     const localUser = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
-    const fav = movies.filter((movie) => {
-        return localUser.FavoriteMovies.includes(movie.id);
-    });
-
     const [username, setUsername] = useState(localUser.Username || "");
     const [password, setPassword] = useState(localUser.Password || "");
     const [email, setEmail] = useState(localUser.Email || "");
     const [birthday, setBirthday] = useState(localUser.Birthday || "");
     const [errorMessage, setErrorMessage] = useState("");
+    const [userUpdated, setUserUpdated] = useState(false);
+
+    const fav = movies.filter((movie) => {
+        return localUser.FavoriteMovies.includes(movie.id);
+    });
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -78,11 +79,16 @@ export const ProfileView = ({ movies }) => {
         });
     };
 
+    const handleFavoriteUpdate = () => {
+        setUser(JSON.parse(localStorage.getItem("user")));
+        setUserUpdated(!userUpdated);
+    }
+
     return (
         <Form>
             {errorMessage && <p className="text-danger">{errorMessage}</p>}
             <Form.Group controlId="formUsername">
-                <Form.Label>
+                <Form.Label style={{ color: "white" }}>
                     Username:
                 </Form.Label>
                 <Form.Control
@@ -91,10 +97,11 @@ export const ProfileView = ({ movies }) => {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     minLength='4'
+                    style={{ color: "white" }}
                 />
             </Form.Group>
             <Form.Group controlId="formPassword">
-                <Form.Label>
+                <Form.Label style={{ color: "white" }}>
                     Password:
                 </Form.Label>
                 <Form.Control
@@ -102,10 +109,11 @@ export const ProfileView = ({ movies }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    style={{ color: "white" }}
                 />
             </Form.Group>
             <Form.Group controlId="formEmail">
-                <Form.Label>
+                <Form.Label style={{ color: "white" }}>
                     Email:
                 </Form.Label>
                 <Form.Control
@@ -113,10 +121,11 @@ export const ProfileView = ({ movies }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    style={{ color: "white" }}
                 />
             </Form.Group>
             <Form.Group controlId="formBdate">
-                <Form.Label>
+                <Form.Label style={{ color: "white" }}>
                     Birthday:
                 </Form.Label>
                 <Form.Control
@@ -124,17 +133,18 @@ export const ProfileView = ({ movies }) => {
                     value={birthday}
                     onChange={(e) => setBirthday(e.target.value)}
                     required
+                    style={{ color: "white" }}
                 />
             </Form.Group>
             <Button variant="primary" type="submit">Update Profile</Button>
             <Button variant="secondary" onClick={handleDelete} className="ml-2">Delete Account</Button>
 
-            <h3>Favorite Movies:</h3>
+            <h3 style={{ color: "white" }}>Favorite Movies:</h3>
             <Row className="justify-content-md-center">
             {
                 localUser && fav.map((movie) => (
                     <Col sm={10} md={8} lg={5} xl={3}>
-                    <MovieCard movie={movie}>
+                    <MovieCard movie={movie} onFavoriteUpdate={handleFavoriteUpdate}>
 
 						<Card className="h-100">
                          <Card.Img variant="top" src={movie.ImagePath}/>

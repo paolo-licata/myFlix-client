@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss"
 
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie, onFavoriteUpdate }) => {
 
 	const user = JSON.parse(localStorage.getItem("user"));
 	const token = localStorage.getItem("token");
+	const [isFavorite, setIsFavorite] = useState(false);
+
+	useEffect(() => {
+		const isMovieFavorite = user.FavoriteMovies.includes(movie.id);
+		setIsFavorite(isMovieFavorite);
+	}, [user, movie.id]);
 
 	const addFavorite = () => {
 		fetch(`https://my-movie-flix-a563168476e8.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
@@ -20,7 +26,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 		})
 			.then((response) => response.json())
 			.then(movies => {
-				localStorage.setItem("user", JSON.stringify(movies))
+				localStorage.setItem("user", JSON.stringify(movies));
+				setIsFavorite(true);
+				onFavoriteUpdate();
 				alert("Movie added to Favorites")
 			})
 			.catch(e => console.log(e))
@@ -37,7 +45,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 				.then((response) => response.json())
 				.then(movies => {
 						localStorage.setItem("user", JSON.stringify(movies))
-						alert("Movie deleted")
+						setIsFavorite(false);
+						onFavoriteUpdate();
+						alert("Movie deleted from favorites")
 				})
 				.catch(e => console.log(e))
 }
@@ -47,12 +57,15 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 		<Card className="h-100">
 			<Card.Img className="card-image" variant="top" src={movie.imagePath} />
 			<Card.Body>
-				<Card.Title>{movie.title}</Card.Title>
+				<Card.Title style={{ color: "white" }}>{movie.title}</Card.Title>
 				<Link to={`/movies/${movie.id}`}>
 					<Button className="watch-button" variant="link">Watch Now</Button>
 				</Link>
-				<Button className="add-button" onClick={addFavorite}>Add</Button>
-				<Button className="remove-button" onClick={removeFavorite} variant="link">Remove</Button>
+				{isFavorite ? (
+					<Button className="remove-button" onClick={removeFavorite} variant="link">Remove</Button>
+				) : (
+					<Button className="add-button" onClick={addFavorite}>Add</Button>
+				)}
 			</Card.Body>
 		</Card>
 	)
@@ -68,6 +81,7 @@ MovieCard.propTypes = {
 			Name: PropTypes.string.isRequired,
 	}),
 	imagePath: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
 })
 }
 		
