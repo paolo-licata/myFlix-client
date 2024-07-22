@@ -4,9 +4,9 @@ import Container from "react-bootstrap/Container";
 import { store } from "./redux/store";
 import { Provider } from 'react-redux';
 
-
 // bundle index.scss
 import "./index.scss";
+
 
 //Main component
 const MyFlixApplication = () => {

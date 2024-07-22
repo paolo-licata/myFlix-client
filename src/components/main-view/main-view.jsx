@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/reducers/movies.js";
+import { MoviesList } from "../movies-list/movies-list.jsx";
 
 
 export const MainView = () => {
@@ -129,19 +130,7 @@ export const MainView = () => {
             path="/"
             element={
               <>
-                {!user ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <Col>The list is empty.</Col>
-                ) : (
-                  <>
-                    {movies.map((movie) => (
-                      <Col className="mb-5" key={movie.id} sm={6} md={5} lg={3} xl={2}>
-                        <MovieCard movie={movie} user={user} />
-                      </Col>
-                    ))}
-                  </>
-                )}
+                {!user ? <Navigate to="/login" replace /> : <MoviesList />}
               </>
             }
           />

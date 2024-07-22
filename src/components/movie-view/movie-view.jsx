@@ -1,19 +1,14 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import "./movie-view.scss";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
-export const MovieView = ({ movies, onBackClick }) => {
+export const MovieView = ({ onBackClick }) => {
 
+	const movies = useSelector((state) => state.movies.list);
 	const { movieId } = useParams();
+	const movie = movies.find((m) => m.id === movieId);
 
-	//console.log("movies", movies);
-	//console.log("movie", movieId);
-
-	const movie = useSelector((state) => state.movies);
-
-	//console.log("movie", movie);
 
 	if (!movie) {
 		return <div>Movie not found</div>;

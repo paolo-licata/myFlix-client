@@ -88,7 +88,7 @@ export const ProfileView = ({ movies }) => {
         <Form>
             {errorMessage && <p className="text-danger">{errorMessage}</p>}
             <Form.Group controlId="formUsername">
-                <Form.Label style={{ color: "white" }}>
+                <Form.Label>
                     Username:
                 </Form.Label>
                 <Form.Control
@@ -97,11 +97,10 @@ export const ProfileView = ({ movies }) => {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     minLength='4'
-                    style={{ color: "white" }}
                 />
             </Form.Group>
             <Form.Group controlId="formPassword">
-                <Form.Label style={{ color: "white" }}>
+                <Form.Label>
                     Password:
                 </Form.Label>
                 <Form.Control
@@ -109,11 +108,10 @@ export const ProfileView = ({ movies }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    style={{ color: "white" }}
                 />
             </Form.Group>
             <Form.Group controlId="formEmail">
-                <Form.Label style={{ color: "white" }}>
+                <Form.Label>
                     Email:
                 </Form.Label>
                 <Form.Control
@@ -121,11 +119,10 @@ export const ProfileView = ({ movies }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    style={{ color: "white" }}
                 />
             </Form.Group>
             <Form.Group controlId="formBdate">
-                <Form.Label style={{ color: "white" }}>
+                <Form.Label>
                     Birthday:
                 </Form.Label>
                 <Form.Control
@@ -133,13 +130,12 @@ export const ProfileView = ({ movies }) => {
                     value={birthday}
                     onChange={(e) => setBirthday(e.target.value)}
                     required
-                    style={{ color: "white" }}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">Update Profile</Button>
-            <Button variant="secondary" onClick={handleDelete} className="ml-2">Delete Account</Button>
+            <Button className="update-btn" variant="primary" type="submit">Update Profile</Button>
+            <Button className="delete-btn" variant="secondary" onClick={handleDelete}>Delete Account</Button>
 
-            <h3 style={{ color: "white" }}>Favorite Movies:</h3>
+            <h3>Favorite Movies:</h3>
             <Row className="justify-content-md-center">
             {
                 localUser && fav.map((movie) => (
