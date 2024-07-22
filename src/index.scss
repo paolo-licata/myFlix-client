@@ -1,6 +1,123 @@
-$primary: #437091;
-$secondary: #bd4652;
-$body-bg: #eaeaea7b;
-
+$primary: #6000b4;
+$secondary: #dedddd;
+$body-bg: #ebebeb;
 
 @import '~bootstrap/scss/bootstrap.scss';
+
+body {
+	margin-top: 70px;
+}
+
+.title {
+	font-size: 16px;
+}
+
+//login - signup CSS
+.signup-btn {
+	margin-top: 10px;
+}
+
+.login-btn {
+	margin-top: 10px;
+}
+
+
+//MovieView CSS
+
+.h-100 {
+	position: relative;
+	border: 2px solid $secondary;
+}
+
+.card-image {
+	height: 60%;
+}
+
+.watch-button {
+	position: absolute;
+	bottom: 50px;
+	left: 0px;
+}
+
+.add-button {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+
+.remove-button {
+	position: absolute;
+	bottom: 10px;
+	left: 115px;
+}
+
+//Navbar CSS
+
+.brand {
+	color: white;
+}
+
+.nav-element {
+	color: white;
+}
+
+//MovieView CSS
+
+.back-button {
+  padding: 4px 12px;
+  color: white;
+  background-color: $primary;
+  border: none;
+  border-radius: 4px;
+}
+
+.play-button {
+  padding: 4px 12px;
+  margin-right: 10px;
+	margin-top: 10px;
+  color: black;
+  background-color: $secondary;
+  border: none;
+  border-radius: 4px;
+}
+
+.movie-cont {
+  color: black;
+  width: 500px;
+  border: 2px solid #d8d8d8;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.movie-image {
+  width: 100%;
+}
+
+//Search box CSS
+
+.search-container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin-top: 20pxpx;
+}
+
+.search-filter {
+	border: 2px solid $secondary;
+	width: 300px;
+}
+
+//ProfileView CSS
+
+.update-btn {
+	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-right: 10px;
+}
+
+.delete-btn {
+	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-right: 10px;
+}
+

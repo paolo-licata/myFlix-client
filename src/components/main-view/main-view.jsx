@@ -8,6 +8,9 @@ import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setMovies } from "../../redux/reducers/movies.js";
+import { MoviesList } from "../movies-list/movies-list.jsx";
 
 
 export const MainView = () => {
@@ -15,7 +18,9 @@ export const MainView = () => {
 	const storedToken = localStorage.getItem("token");
 	const [user, setUser] = useState(storedUser? storedUser : null);
 	const [token, setToken] = useState(storedToken? storedToken : null);
-	const [movies, setMovies] = useState([]);
+	const movies = useSelector((state) => state.movies.list);
+
+  const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (!token) {
@@ -27,7 +32,6 @@ export const MainView = () => {
 		})
 		.then((response) => response.json())
 		.then((movies) => {
-			console.log(movies);
 			const moviesFromAPI = movies.map(movie =>  {
 				return {
 					id: movie._id,
@@ -38,7 +42,7 @@ export const MainView = () => {
 					director: movie.Director
 				}
 			});
-			setMovies(moviesFromAPI);
+			dispatch(setMovies(moviesFromAPI));
 		});
 	}, [token]);
 			
@@ -99,7 +103,11 @@ export const MainView = () => {
                 <Navigate to="/login" replace />
               ) : (
                 <Col sm={4} md={6} lg={8} xl={10}>
-                  <ProfileView movies={movies} />
+                  <ProfileView 
+                  username={user.Username}
+                  token={token}
+                  movies={movies}
+                   />
                 </Col>
               )
             }
@@ -115,7 +123,7 @@ export const MainView = () => {
                   <Col>The list is empty.</Col>
                 ) : (
                   <Col sm={4} md={6} lg={8} xl={10}>
-                    <MovieView movies={movies} />
+                    <MovieView />
                   </Col>
                 )}
               </>
@@ -126,19 +134,7 @@ export const MainView = () => {
             path="/"
             element={
               <>
-                {!user ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <Col>The list is empty.</Col>
-                ) : (
-                  <>
-                    {movies.map((movie) => (
-                      <Col className="mb-5" key={movie.id} sm={6} md={5} lg={3} xl={2}>
-                        <MovieCard movie={movie} />
-                      </Col>
-                    ))}
-                  </>
-                )}
+                {!user ? <Navigate to="/login" replace /> : <MoviesList />}
               </>
             }
           />

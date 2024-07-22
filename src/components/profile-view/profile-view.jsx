@@ -9,15 +9,16 @@ export const ProfileView = ({ movies }) => {
     const localUser = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
-    const fav = movies.filter((movie) => {
-        return localUser.FavoriteMovies.includes(movie.id);
-    });
-
     const [username, setUsername] = useState(localUser.Username || "");
     const [password, setPassword] = useState(localUser.Password || "");
     const [email, setEmail] = useState(localUser.Email || "");
     const [birthday, setBirthday] = useState(localUser.Birthday || "");
     const [errorMessage, setErrorMessage] = useState("");
+    const [userUpdated, setUserUpdated] = useState(false);
+
+    const fav = movies.filter((movie) => {
+        return localUser.FavoriteMovies.includes(movie.id);
+    });
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -78,6 +79,11 @@ export const ProfileView = ({ movies }) => {
         });
     };
 
+    const handleFavoriteUpdate = () => {
+        setUser(JSON.parse(localStorage.getItem("user")));
+        setUserUpdated(!userUpdated);
+    }
+
     return (
         <Form>
             {errorMessage && <p className="text-danger">{errorMessage}</p>}
@@ -126,15 +132,15 @@ export const ProfileView = ({ movies }) => {
                     required
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">Update Profile</Button>
-            <Button variant="secondary" onClick={handleDelete} className="ml-2">Delete Account</Button>
+            <Button className="update-btn" variant="primary" type="submit">Update Profile</Button>
+            <Button className="delete-btn" variant="secondary" onClick={handleDelete}>Delete Account</Button>
 
             <h3>Favorite Movies:</h3>
             <Row className="justify-content-md-center">
             {
                 localUser && fav.map((movie) => (
-                    <Col sm={10} md={8} lg={5} xl={3}>
-                    <MovieCard movie={movie}>
+                    <Col key={movie.id} sm={10} md={8} lg={5} xl={3}>
+                    <MovieCard movie={movie} onFavoriteUpdate={handleFavoriteUpdate}>
 
 						<Card className="h-100">
                          <Card.Img variant="top" src={movie.ImagePath}/>

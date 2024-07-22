@@ -1,18 +1,14 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import "./movie-view.scss";
 
-export const MovieView = ({ movies, onBackClick }) => {
+export const MovieView = ({ onBackClick }) => {
 
+	const movies = useSelector((state) => state.movies.list);
 	const { movieId } = useParams();
-
-	//console.log("movies", movies);
-	//console.log("movie", movieId);
-
 	const movie = movies.find((m) => m.id === movieId);
 
-	//console.log("movie", movie);
 
 	if (!movie) {
 		return <div>Movie not found</div>;
@@ -64,5 +60,5 @@ MovieView.propTypes = {
 			}).isRequired,
 			imagePath: PropTypes.string.isRequired,
 		})
-	).isRequired,
+	)
 };
