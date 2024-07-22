@@ -139,7 +139,7 @@ export const ProfileView = ({ movies }) => {
             <Row className="justify-content-md-center">
             {
                 localUser && fav.map((movie) => (
-                    <Col sm={10} md={8} lg={5} xl={3}>
+                    <Col key={movie.id} sm={10} md={8} lg={5} xl={3}>
                     <MovieCard movie={movie} onFavoriteUpdate={handleFavoriteUpdate}>
 
 						<Card className="h-100">

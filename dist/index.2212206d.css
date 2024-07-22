@@ -13232,7 +13232,7 @@ body {
 }
 
 .back-button {
-  color: #000;
+  color: #fff;
   background-color: #6000b4;
   border: none;
   border-radius: 4px;
@@ -13240,8 +13240,8 @@ body {
 }
 
 .play-button {
-  color: #fff;
-  background-color: #000;
+  color: #000;
+  background-color: #dedddd;
   border: none;
   border-radius: 4px;
   margin-top: 10px;
