@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./movie-view.scss";
+import { useSelector } from "react-redux";
 
 export const MovieView = ({ movies, onBackClick }) => {
 
@@ -10,7 +11,7 @@ export const MovieView = ({ movies, onBackClick }) => {
 	//console.log("movies", movies);
 	//console.log("movie", movieId);
 
-	const movie = movies.find((m) => m.id === movieId);
+	const movie = useSelector((state) => state.movies);
 
 	//console.log("movie", movie);
 
