@@ -10,7 +10,7 @@ export const ProfileView = ({ movies }) => {
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
     const [username, setUsername] = useState(localUser.Username || "");
-    const [password, setPassword] = useState(localUser.Password || "");
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState(localUser.Email || "");
     const [birthday, setBirthday] = useState(localUser.Birthday || "");
     const [errorMessage, setErrorMessage] = useState("");
@@ -107,7 +107,6 @@ export const ProfileView = ({ movies }) => {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
                 />
             </Form.Group>
             <Form.Group controlId="formEmail">
