@@ -82,7 +82,7 @@ export const MainView = () => {
           />
 
           <Route
-            path="/users"
+            path="/signup"
             element={
               <>
                 {user ? (
