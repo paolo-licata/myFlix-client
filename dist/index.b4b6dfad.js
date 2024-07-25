@@ -43720,6 +43720,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                             !user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                        className: "nav-element",
                                         as: (0, _reactRouterDom.Link),
                                         to: "/login",
                                         children: "Login"
@@ -43729,6 +43730,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         columnNumber: 9
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                        className: "nav-element",
                                         as: (0, _reactRouterDom.Link),
                                         to: "/signup",
                                         children: "Signup"
@@ -43742,6 +43744,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                             user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                        className: "nav-element",
                                         as: (0, _reactRouterDom.Link),
                                         to: "/",
                                         children: "Home"
@@ -43751,6 +43754,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         columnNumber: 9
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                        className: "nav-element",
                                         as: (0, _reactRouterDom.Link),
                                         to: "/profile",
                                         children: "Your Profile"
@@ -43760,6 +43764,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         columnNumber: 9
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                        className: "nav-element",
                                         onClick: onLoggedOut,
                                         children: "Logout"
                                     }, void 0, false, {
